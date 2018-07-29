@@ -50,42 +50,4 @@ $output=exec('python WFapi.py');
             }
         ?>
     </table> 
-    <form method="POST">
-        <input type ="text" name="type" style=width:80px value="">
-        <input type ="text" name="time" style=width:80px value="">
-        <input type ="text" name="reward" style=width:80px value="">
-        <input type ="submit" name="send" style=width:80px value="新增">
-        <input type ="submit" name="delete" style=width:80px value="清除資料庫">
-    </form>
-
-    <?php    
-        if(array_key_exists('send',$_POST)){
-            insert();
-            header('location: http://localhost/wf/wf.php');
-        }
-        function insert(){
-            $type = $_POST['type'];
-            //echo "任務類型 $type";
-            $time = $_POST['time'];
-            //echo "時間 $time";
-            $reward = $_POST['reward'];
-            //echo "獎勵 $reward";
-            $sql = "INSERT INTO wfa (type,TIME,REWARD) VALUES ('$type', '$time', '$reward')";
-            $con=mysqlI_connect("localhost","root","","wf");
-            $con->query($sql);
-            $con->close();   
-        }
-
-        if(array_key_exists('delete',$_POST)){
-            delete();
-            header('location: http://localhost/wf/wf.php');
-        }
-        function delete(){
-            $sql = "DELETE FROM `wfa`";
-            $con=mysqlI_connect("localhost","root","","wf");
-            $con->query($sql);
-            $con->close();   
-        }
-    ?>
-
 </body>
